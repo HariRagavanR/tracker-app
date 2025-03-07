@@ -13,7 +13,7 @@ from backend import config
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "your_secret_key")
 CORS(app)  # Enable CORS for mobile API access
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent", logger=True, engineio_logger=True)
 
 # MongoDB Connection
 client = MongoClient(config.MONGO_URI)

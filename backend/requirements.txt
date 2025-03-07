@@ -1,33 +1,13 @@
-# Flask==3.0.0
-# Flask-SocketIO==5.3.4
-# Flask-Cors==4.0.0
-# pymongo==4.6.1
-# eventlet==0.33.3
-# gunicorn==21.2.0
-# flask-cors==4.0.0
-# flask
-# flask-socketio
-# flask-cors
-# pymongo
-# dnspython
-# eventlet 
-# gevent
-# gevent-websocket
-# gunicorn
-
-Flask
-flask-socketio
-flask-cors
-pymongo
-dnspython
-gevent
-gevent-websocket
-eventlet
+Flask==3.0.0
 Flask-SocketIO==5.3.6
+Flask-Cors==4.0.0
+pymongo==4.6.1
+dnspython==2.3.0
+gunicorn==21.2.0
+
+# WebSocket Support
 python-engineio==4.7.1
 python-socketio==5.9.0
-eventlet==0.33.3
-gevent==21.8.0
+gevent==23.9.1
 gevent-websocket==0.10.1
-gunicorn==20.1.0
-flask-cors==3.0.10
+eventlet==0.33.3
