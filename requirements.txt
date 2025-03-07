@@ -1,5 +1,6 @@
 flask
 flask-socketio
+flask-cors  
 pymongo
 dnspython
 gevent
