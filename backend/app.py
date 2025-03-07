@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS  # Added CORS support
 from pymongo import MongoClient
 import datetime
 from backend import config
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for mobile API access
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # MongoDB Connection
@@ -12,11 +14,20 @@ client = MongoClient(config.MONGO_URI)
 db = client[config.DB_NAME]
 locations_collection = db[config.COLLECTION_NAME]
 
+# WebSocket Connection Handlers
+@socketio.on('connect')
+def handle_connect():
+    print("A client connected.")
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print("A client disconnected.")
+
 # API Endpoint to receive GPS data (supports multiple devices)
 @app.route('/update_location', methods=['POST'])
 def update_location():
     data = request.json
-    device_id = data.get("device_id")  # Renamed vehicle_id to device_id
+    device_id = data.get("device_id")
     latitude = data.get("latitude")
     longitude = data.get("longitude")
 
@@ -27,7 +38,7 @@ def update_location():
         "device_id": device_id,
         "latitude": latitude,
         "longitude": longitude,
-        "timestamp": datetime.datetime.utcnow()
+        "timestamp": datetime.datetime.utcnow().isoformat()  # Store timestamp in ISO format
     }
 
     # Store in MongoDB
@@ -61,5 +72,5 @@ def get_latest_locations():
     latest_locations = list(locations_collection.aggregate(pipeline))
     return jsonify({"devices": latest_locations})
 
-if __name__ != "__main__":
-    gunicorn_app = app
+if __name__ == "__main__":
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)  # Ensure WebSockets run
