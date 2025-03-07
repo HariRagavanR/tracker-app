@@ -23,3 +23,11 @@ dnspython
 gevent
 gevent-websocket
 eventlet
+Flask-SocketIO==5.3.6
+python-engineio==4.7.1
+python-socketio==5.9.0
+eventlet==0.33.3
+gevent==21.8.0
+gevent-websocket==0.10.1
+gunicorn==20.1.0
+flask-cors==3.0.10
