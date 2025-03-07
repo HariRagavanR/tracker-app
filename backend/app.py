@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from pymongo import MongoClient
 import datetime
-import config
+from backend import config
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
