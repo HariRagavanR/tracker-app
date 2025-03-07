@@ -4,10 +4,13 @@ from flask_cors import CORS  # Added CORS support
 from pymongo import MongoClient
 import datetime
 from backend import config
+from eventlet import monkey_patch
+
+monkey_patch()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for mobile API access
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 
 # MongoDB Connection
 client = MongoClient(config.MONGO_URI)

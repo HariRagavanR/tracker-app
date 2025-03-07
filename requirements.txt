@@ -1,8 +1,9 @@
-flask
+Flask
 flask-socketio
-flask-cors  
+flask-cors
 pymongo
 dnspython
 gevent
 gevent-websocket
 gunicorn
+eventlet
