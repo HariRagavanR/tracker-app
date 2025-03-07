@@ -1,0 +1,8 @@
+tk
+requests
+pymongo
+flask-socketio
+folium
+geopy
+pywebview
+websocket

@@ -1,7 +1,6 @@
-flask
-flask-socketio
-pymongo
-dnspython
-gevent
-gevent-websocket
-gunicorn
+Flask==3.0.0
+Flask-SocketIO==5.3.4
+Flask-Cors==4.0.0
+pymongo==4.6.1
+eventlet==0.33.3
+gunicorn==21.2.0

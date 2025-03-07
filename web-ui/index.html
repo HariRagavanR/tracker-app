@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live GPS Tracking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Live GPS Tracking</h2>
+    <select id="deviceSelect"></select>
+    <div id="map"></div>
+
+    <script>
+        const BACKEND_URL = "https://my-tracker-app.onrender.com";
+
+        // Connect to WebSocket
+        var socket = io.connect(BACKEND_URL);
+
+        // Fetch all devices' latest locations
+        function loadDevices() {
+            fetch(BACKEND_URL + "/get_latest_locations")
+                .then(response => response.json())
+                .then(data => {
+                    let deviceSelect = document.getElementById("deviceSelect");
+                    deviceSelect.innerHTML = "";
+                    data.devices.forEach(device => {
+                        let option = document.createElement("option");
+                        option.value = device.device_id;
+                        option.text = "Device " + device.device_id;
+                        deviceSelect.appendChild(option);
+                    });
+                });
+        }
+
+        // Listen for real-time updates
+        socket.on("location_update", function(data) {
+            console.log("New Location Update:", data);
+        });
+
+        loadDevices(); // Load devices on page load
+    </script>
+</body>
+</html>
